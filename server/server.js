@@ -38,6 +38,10 @@ app.use(
     }),
     resave: false,
     saveUninitialized: false,
+    cookie: {
+      httpOnly: true,
+      sameSite: true,
+    },
   })
 );
 app.use(passport.initialize());
