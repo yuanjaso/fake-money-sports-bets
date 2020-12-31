@@ -3,12 +3,20 @@ const morgan = require('morgan');
 const helmet = require('helmet');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const passport = require('passport');
+const passportLocal = require('passport-local');
+const expressSession = require('express-session');
+const connectMongo = require('connect-mongo');
 
 const accountRoutes = require('./routes/account');
+const AccountModel = require('./models/account');
+
+const MongoStore = connectMongo(expressSession);
 
 // environment variables
 const PORT = process.env.PORT;
 const MONGODB_URI = process.env.MONGODB_URI;
+const SESSION_SECRET = process.env.SESSION_SECRET;
 
 // connect to mongodb
 mongoose.connect(MONGODB_URI, {
@@ -22,8 +30,25 @@ app.use(express.static(`${__dirname}/dist/fake-money-sports-bets/`));
 app.use(bodyParser.json());
 app.use(morgan('dev'));
 app.use(helmet());
+app.use(
+  expressSession({
+    secret: SESSION_SECRET,
+    store: new MongoStore({
+      mongooseConnection: mongoose.connection,
+    }),
+    resave: false,
+    saveUninitialized: false,
+  })
+);
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use('/api', accountRoutes);
+
+// passport configuration
+passport.use(new passportLocal.Strategy(AccountModel.authenticate()));
+passport.serializeUser(AccountModel.serializeUser());
+passport.deserializeUser(AccountModel.deserializeUser());
 
 app.listen(PORT, () => {
   console.log(`Server started on port ${PORT}.`);
