@@ -36,6 +36,8 @@ app.use(helmet());
 let secureCookie;
 if (NODE_ENV === 'production') {
   secureCookie = true;
+  // this is needed when deploying on heroku with the secure flag on
+  // otherwise cookie isn't sent to client
   app.set('trust proxy', 1);
 } else {
   secureCookie = false;
