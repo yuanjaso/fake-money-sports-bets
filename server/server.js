@@ -18,6 +18,7 @@ const MongoStore = connectMongo(expressSession);
 const PORT = process.env.PORT;
 const MONGODB_URI = process.env.MONGODB_URI;
 const SESSION_SECRET = process.env.SESSION_SECRET;
+const NODE_ENV = process.env.NODE_ENV;
 
 // connect to mongodb
 mongoose.connect(MONGODB_URI, {
@@ -42,6 +43,7 @@ app.use(
     cookie: {
       httpOnly: true,
       sameSite: true,
+      secure: NODE_ENV === 'production',
     },
   })
 );
