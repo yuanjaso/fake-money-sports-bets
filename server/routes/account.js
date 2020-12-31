@@ -10,6 +10,7 @@ router.get('/accounts', async (req, res, next) => {
     let accounts = await AccountModel.find();
     accounts = accounts.map((el) => ({
       balance: el.balance,
+      username: el.username,
     }));
     res.json(accounts);
   } catch (err) {
