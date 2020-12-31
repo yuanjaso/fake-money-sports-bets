@@ -9,6 +9,7 @@ const expressSession = require('express-session');
 const connectMongo = require('connect-mongo');
 
 const accountRoutes = require('./routes/account');
+const authRoutes = require('./routes/auth');
 const AccountModel = require('./models/account');
 
 const MongoStore = connectMongo(expressSession);
@@ -48,6 +49,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use('/api', accountRoutes);
+app.use('/api', authRoutes);
 
 // passport configuration
 passport.use(new passportLocal.Strategy(AccountModel.authenticate()));
