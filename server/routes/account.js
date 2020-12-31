@@ -25,7 +25,13 @@ router.post('/accounts', (req, res, next) => {
       req.body.password,
       (err, account) => {
         if (err) {
-          return res.status(409).json('Username is already taken');
+          switch (err.name) {
+            case 'MissingUsernameError':
+            case 'MissingPasswordError':
+              return res.status(400).json(err.message);
+            case 'UserExistsError':
+              return res.status(409).json(err.message);
+          }
         }
 
         passport.authenticate('local')(req, res, () => {
