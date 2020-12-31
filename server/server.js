@@ -28,7 +28,7 @@ mongoose.connect(MONGODB_URI, {
 
 // express server setup
 const app = express();
-app.use(express.static(`${__dirname}/dist/fake-money-sports-bets/`));
+app.use(express.static(`${__dirname}/../dist/fake-money-sports-bets/`));
 app.use(bodyParser.json());
 app.use(morgan('dev'));
 app.use(helmet());
