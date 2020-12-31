@@ -29,7 +29,10 @@ router.post('/accounts', (req, res, next) => {
         }
 
         passport.authenticate('local')(req, res, () => {
-          res.status(201).json('Registered sucessfully');
+          res.status(201).json({
+            username: account.username,
+            balance: account.balance,
+          });
         });
       }
     );
