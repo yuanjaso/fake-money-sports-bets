@@ -2,7 +2,7 @@
   "name": "fake-money-sports-bets",
   "version": "0.0.0",
   "scripts": {
-    "format": "npx prettier --write .",
+    "format": "prettier --write .",
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build --prod",
