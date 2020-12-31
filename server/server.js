@@ -32,6 +32,16 @@ app.use(express.static(`${__dirname}/../dist/fake-money-sports-bets/`));
 app.use(bodyParser.json());
 app.use(morgan('dev'));
 app.use(helmet());
+
+let secureCookie;
+if (NODE_ENV === 'production') {
+  secureCookie = true;
+  // this is needed when deploying on heroku with the secure flag on
+  // otherwise cookie isn't sent to client
+  app.set('trust proxy', 1);
+} else {
+  secureCookie = false;
+}
 app.use(
   expressSession({
     secret: SESSION_SECRET,
@@ -43,7 +53,7 @@ app.use(
     cookie: {
       httpOnly: true,
       sameSite: true,
-      secure: NODE_ENV === 'production',
+      secure: secureCookie,
     },
   })
 );
