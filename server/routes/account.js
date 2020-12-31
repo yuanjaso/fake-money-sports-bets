@@ -5,7 +5,15 @@ const AccountModel = require('../models/account');
 
 const router = express.Router();
 
-router.get('/accounts', async (req, res, next) => {
+function checkAuthenticated(req, res, next) {
+  if (req.isAuthenticated()) {
+    next();
+  } else {
+    res.status(401).json();
+  }
+}
+
+router.get('/accounts', checkAuthenticated, async (req, res, next) => {
   try {
     let accounts = await AccountModel.find();
     accounts = accounts.map((el) => ({
