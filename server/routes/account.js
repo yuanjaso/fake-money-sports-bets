@@ -29,7 +29,11 @@ router.get('/accounts', checkAuthenticated, async (req, res, next) => {
 router.post('/accounts', (req, res, next) => {
   try {
     AccountModel.register(
-      new AccountModel({ username: req.body.username, balance: 100000 }),
+      new AccountModel({
+        username: req.body.username,
+        email: req.body.email,
+        balance: 100000,
+      }),
       req.body.password,
       (err, account) => {
         if (err) {
