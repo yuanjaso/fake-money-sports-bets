@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 const morgan = require('morgan');
 const helmet = require('helmet');
 const bodyParser = require('body-parser');
@@ -41,6 +42,7 @@ if (NODE_ENV === 'production') {
   app.set('trust proxy', 1);
 } else {
   secureCookie = false;
+  app.use(cors({ origin: 'http://localhost:4200' }));
 }
 app.use(
   expressSession({
