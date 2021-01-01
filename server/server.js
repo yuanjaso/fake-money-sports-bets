@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 const morgan = require('morgan');
 const helmet = require('helmet');
 const bodyParser = require('body-parser');
@@ -41,6 +42,7 @@ if (NODE_ENV === 'production') {
   app.set('trust proxy', 1);
 } else {
   secureCookie = false;
+  app.use(cors({ origin: 'http://localhost:4200' }));
 }
 app.use(
   expressSession({
@@ -62,6 +64,11 @@ app.use(passport.session());
 
 app.use('/api', accountRoutes);
 app.use('/api', authRoutes);
+
+// last middleware used as a fallback option for the frontend to serve static files properly
+app.get('/*', (req, res) => {
+  res.sendFile('index.html', { root: './dist/fake-money-sports-bets' });
+});
 
 // passport configuration
 passport.use(new passportLocal.Strategy(AccountModel.authenticate()));

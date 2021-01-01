@@ -3,7 +3,7 @@ const passport = require('passport');
 
 const router = express.Router();
 
-router.post('/login', passport.authenticate('local'), (req, res, next) => {
+router.post('/signin', passport.authenticate('local'), (req, res, next) => {
   try {
     res.json();
   } catch (err) {
@@ -11,7 +11,7 @@ router.post('/login', passport.authenticate('local'), (req, res, next) => {
   }
 });
 
-router.get('/logout', (req, res, next) => {
+router.get('/signout', (req, res, next) => {
   try {
     req.logout();
     res.clearCookie('connect.sid');
