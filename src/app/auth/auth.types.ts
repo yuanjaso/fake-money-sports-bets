@@ -8,3 +8,8 @@ export type SignUpResponse = {
   username: string;
   balance: number;
 };
+
+export type SignInForm = {
+  username: string;
+  password: string;
+};
