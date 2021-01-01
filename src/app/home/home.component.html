@@ -1,1 +1,5 @@
-<p>home works!</p>
+<h1>Home</h1>
+
+<div *ngFor="let account of accounts">
+  {{ account.username }}: {{ account.balance | currency }}
+</div>
