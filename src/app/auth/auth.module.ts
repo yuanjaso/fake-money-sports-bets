@@ -6,6 +6,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { AuthRoutingModule } from './auth-routing.module';
 import { AuthComponent } from './auth.component';
+import { AuthService } from './auth.service';
 import { SigninComponent } from './signin/signin.component';
 import { SignupComponent } from './signup/signup.component';
 
@@ -19,5 +20,6 @@ import { SignupComponent } from './signup/signup.component';
     MatInputModule,
     MatButtonModule,
   ],
+  providers: [AuthService],
 })
 export class AuthModule {}
