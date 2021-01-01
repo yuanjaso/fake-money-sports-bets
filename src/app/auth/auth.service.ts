@@ -11,7 +11,7 @@ export class AuthService {
     return this.httpClient.post('/accounts/', signUpForm);
   }
 
-  signIn(signInForm: SignInForm): Observable<unknown> {
+  signIn(signInForm: SignInForm): Observable<null> {
     return this.httpClient.post('/signin/', signInForm);
   }
 }
