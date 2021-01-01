@@ -1,5 +1,7 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
 
 @Component({
@@ -20,11 +22,25 @@ export class SignupComponent implements OnInit {
     email: new FormControl('', [Validators.required, Validators.email]),
   });
 
-  constructor(private authService: AuthService) {}
+  showUsernameTaken = false;
+
+  constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {}
 
   signUp(): void {
-    this.authService.signUp(this.form.value).subscribe(console.log);
+    this.showUsernameTaken = false;
+    this.authService.signUp(this.form.value).subscribe({
+      error: (err: HttpErrorResponse) => {
+        if (err.status === 409) {
+          this.showUsernameTaken = true;
+        } else {
+          throw err;
+        }
+      },
+      next: () => {
+        this.router.navigateByUrl('/home');
+      },
+    });
   }
 }
