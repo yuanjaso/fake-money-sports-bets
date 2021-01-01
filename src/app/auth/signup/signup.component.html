@@ -1,1 +1,25 @@
-<p>signup works!</p>
+<form (submit)="signUp()" class="column" [formGroup]="form">
+  <mat-form-field appearance="outline">
+    <mat-label>Username</mat-label>
+    <input matInput type="text" formControlName="username" />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Password</mat-label>
+    <input matInput type="password" formControlName="password" />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Email</mat-label>
+    <input matInput type="email" formControlName="email" />
+  </mat-form-field>
+
+  <button
+    type="submit"
+    mat-raised-button
+    color="primary"
+    [disabled]="form.invalid"
+  >
+    Sign Up
+  </button>
+</form>

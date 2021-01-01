@@ -1,0 +1,4 @@
+// cover the chrome autofill background styling
+input:-webkit-autofill {
+  box-shadow: 0 0 0 1rem white inset;
+}
