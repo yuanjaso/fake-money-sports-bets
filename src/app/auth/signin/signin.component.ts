@@ -1,5 +1,7 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
 
 @Component({
@@ -19,11 +21,25 @@ export class SigninComponent implements OnInit {
     ]),
   });
 
-  constructor(private authService: AuthService) {}
+  showWrongCredentials = false;
+
+  constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {}
 
   signIn(): void {
-    this.authService.signIn(this.form.value).subscribe(console.log);
+    this.showWrongCredentials = false;
+    this.authService.signIn(this.form.value).subscribe({
+      next: () => {
+        this.router.navigateByUrl('/home');
+      },
+      error: (err: HttpErrorResponse) => {
+        if (err.status === 401) {
+          this.showWrongCredentials = true;
+        } else {
+          throw err;
+        }
+      },
+    });
   }
 }
