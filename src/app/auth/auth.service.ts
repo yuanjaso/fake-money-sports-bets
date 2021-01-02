@@ -24,5 +24,10 @@ export class AuthService {
       .post<Account>('/signin/', signInForm)
       .pipe(tap((account) => this.store.account$.next(account)));
   }
+
+  getAccount(): Observable<Account> {
+    return this.httpClient
+      .get<Account>('/account/')
+      .pipe(tap((account) => this.store.account$.next(account)));
   }
 }
