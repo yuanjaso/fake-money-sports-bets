@@ -35,6 +35,7 @@ app.use(morgan('dev'));
 app.use(helmet());
 
 let secureCookie;
+let origin;
 if (NODE_ENV === 'production') {
   secureCookie = true;
   // this is needed when deploying on heroku with the secure flag on
@@ -42,8 +43,9 @@ if (NODE_ENV === 'production') {
   app.set('trust proxy', 1);
 } else {
   secureCookie = false;
-  app.use(cors({ origin: 'http://localhost:4200' }));
+  origin = 'http://localhost:4200';
 }
+app.use(cors({ credentials: true, origin }));
 app.use(
   expressSession({
     secret: SESSION_SECRET,

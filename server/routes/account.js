@@ -13,6 +13,17 @@ function checkAuthenticated(req, res, next) {
   }
 }
 
+router.get('/account', checkAuthenticated, (req, res, next) => {
+  try {
+    res.json({
+      username: req.user.username,
+      balance: req.user.balance,
+    });
+  } catch (err) {
+    next(err);
+  }
+});
+
 router.get('/accounts', checkAuthenticated, async (req, res, next) => {
   try {
     let accounts = await AccountModel.find();

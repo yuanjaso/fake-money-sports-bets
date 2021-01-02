@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.post('/signin', passport.authenticate('local'), (req, res, next) => {
   try {
-    res.json();
+    res.json({ username: req.user.username, balance: req.user.balance });
   } catch (err) {
     next(err);
   }
