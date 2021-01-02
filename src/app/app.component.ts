@@ -8,6 +8,8 @@ import { AuthService } from './auth/auth.service';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
+  showSidenav = true;
+
   constructor(private authService: AuthService, private router: Router) {}
 
   signOut(): void {

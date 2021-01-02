@@ -1,4 +1,20 @@
 <mat-toolbar>
+  <button
+    *ngIf="!showSidenav"
+    class="menu-button"
+    mat-icon-button
+    (click)="showSidenav = true"
+  >
+    <mat-icon>menu</mat-icon>
+  </button>
+  <button
+    *ngIf="showSidenav"
+    class="menu-button"
+    mat-icon-button
+    (click)="showSidenav = false"
+  >
+    <mat-icon>menu_open</mat-icon>
+  </button>
   <button color="primary" mat-raised-button (click)="signOut()">
     Sign Out
   </button>
