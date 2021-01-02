@@ -38,7 +38,7 @@ export class SigninComponent implements OnInit {
       next: () => {
         // if user got taken to signin page after going to a protected page,
         // take them to their original page otherwise go to home page
-        const url = this.store.redirectURL ?? '/home';
+        const url = this.store.redirectURL ?? '/';
         this.router.navigateByUrl(url);
       },
       error: (err: HttpErrorResponse) => {
