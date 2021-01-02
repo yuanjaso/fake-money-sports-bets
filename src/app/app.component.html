@@ -1,1 +1,43 @@
-<router-outlet></router-outlet>
+<mat-toolbar>
+  <button
+    *ngIf="!showSidenav"
+    class="menu-button"
+    mat-icon-button
+    (click)="showSidenav = true"
+  >
+    <mat-icon>menu</mat-icon>
+  </button>
+  <button
+    *ngIf="showSidenav"
+    class="menu-button"
+    mat-icon-button
+    (click)="showSidenav = false"
+  >
+    <mat-icon>menu_open</mat-icon>
+  </button>
+
+  <a mat-button routerLink="/">Fake Money Sports Bets</a>
+
+  <span class="spacer"></span>
+
+  <ng-container *ngIf="isAuthenticated">
+    <span>{{ username }}</span>
+    <span id="balance">{{ balance | currency }}</span>
+
+    <button color="primary" mat-raised-button (click)="signOut()">
+      Sign Out
+    </button>
+  </ng-container>
+</mat-toolbar>
+
+<mat-sidenav-container>
+  <mat-sidenav [opened]="showSidenav" mode="side">
+    <mat-nav-list>
+      <a mat-list-item routerLink="/" disabled>History</a>
+      <a mat-list-item routerLink="/" disabled>Settings</a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

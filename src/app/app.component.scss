@@ -1,0 +1,21 @@
+mat-toolbar {
+  > *:not(:first-child) {
+    margin-left: 1rem;
+  }
+
+  span#balance {
+    color: green;
+  }
+}
+
+mat-sidenav-container {
+  mat-sidenav {
+    mat-nav-list {
+      padding-top: 0;
+
+      > a:not(:last-child) {
+        border-bottom: 1px solid black;
+      }
+    }
+  }
+}
