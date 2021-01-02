@@ -2,6 +2,10 @@ mat-toolbar {
   > *:not(:first-child) {
     margin-left: 1rem;
   }
+
+  span#balance {
+    color: green;
+  }
 }
 
 mat-sidenav-container {
