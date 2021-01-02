@@ -30,6 +30,12 @@
 </mat-toolbar>
 
 <mat-sidenav-container>
+  <mat-sidenav [opened]="showSidenav" mode="side">
+    <mat-nav-list>
+      <a mat-list-item routerLink="/">History</a>
+      <a mat-list-item routerLink="/">Settings</a>
+    </mat-nav-list>
+  </mat-sidenav>
   <mat-sidenav-content>
     <router-outlet></router-outlet>
   </mat-sidenav-content>
