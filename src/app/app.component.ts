@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from './auth/auth.service';
+import { MockStoreService } from './mock-store.service';
 
 @Component({
   selector: 'app-root',
@@ -10,10 +11,16 @@ import { AuthService } from './auth/auth.service';
 export class AppComponent {
   showSidenav = true;
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private store: MockStoreService
+  ) {}
 
   signOut(): void {
-    this.authService.signOut().subscribe();
-    this.router.navigateByUrl('/auth/signin');
+    this.authService.signOut().subscribe(() => {
+      this.store.account$.next(undefined);
+      this.router.navigateByUrl('/auth/signin');
+    });
   }
 }
