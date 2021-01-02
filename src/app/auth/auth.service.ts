@@ -25,6 +25,10 @@ export class AuthService {
       .pipe(tap((account) => this.store.account$.next(account)));
   }
 
+  signOut(): Observable<null> {
+    return this.httpClient.get('/signout/');
+  }
+
   getAccount(): Observable<Account> {
     return this.httpClient
       .get<Account>('/account/')
