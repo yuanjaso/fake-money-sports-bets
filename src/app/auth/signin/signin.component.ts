@@ -2,6 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { MockStoreService } from '../../mock-store.service';
 import { AuthService } from '../auth.service';
 
 @Component({
@@ -23,7 +24,11 @@ export class SigninComponent implements OnInit {
 
   showWrongCredentials = false;
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private store: MockStoreService
+  ) {}
 
   ngOnInit(): void {}
 
@@ -31,7 +36,10 @@ export class SigninComponent implements OnInit {
     this.showWrongCredentials = false;
     this.authService.signIn(this.form.value).subscribe({
       next: () => {
-        this.router.navigateByUrl('/home');
+        // if user got taken to signin page after going to a protected page,
+        // take them to their original page otherwise go to home page
+        const url = this.store.redirectURL ?? '/home';
+        this.router.navigateByUrl(url);
       },
       error: (err: HttpErrorResponse) => {
         if (err.status === 401) {
