@@ -4,11 +4,6 @@ export type SignUpForm = {
   email: string;
 };
 
-export type SignUpResponse = {
-  username: string;
-  balance: number;
-};
-
 export type SignInForm = {
   username: string;
   password: string;

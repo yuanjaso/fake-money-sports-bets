@@ -7,11 +7,11 @@ import { SignInForm, SignUpForm, SignUpResponse } from './auth.types';
 export class AuthService {
   constructor(private httpClient: HttpClientWrapper) {}
 
-  signUp(signUpForm: SignUpForm): Observable<SignUpResponse> {
     return this.httpClient.post('/accounts/', signUpForm);
+  signUp(signUpForm: SignUpForm): Observable<Account> {
   }
 
-  signIn(signInForm: SignInForm): Observable<null> {
     return this.httpClient.post('/signin/', signInForm);
+  signIn(signInForm: SignInForm): Observable<Account> {
   }
 }
