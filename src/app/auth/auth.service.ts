@@ -1,7 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
+import { MockStoreService } from '../mock-store.service';
 import { HttpClientWrapper } from '../shared/http-client-wrapper';
-import { SignInForm, SignUpForm, SignUpResponse } from './auth.types';
+import { Account } from '../shared/shared.types';
+import { SignInForm, SignUpForm } from './auth.types';
 
 @Injectable()
 export class AuthService {
