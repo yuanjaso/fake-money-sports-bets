@@ -5,13 +5,21 @@ import { SignInForm, SignUpForm, SignUpResponse } from './auth.types';
 
 @Injectable()
 export class AuthService {
-  constructor(private httpClient: HttpClientWrapper) {}
+  constructor(
+    private httpClient: HttpClientWrapper,
+    private store: MockStoreService
+  ) {}
 
-    return this.httpClient.post('/accounts/', signUpForm);
   signUp(signUpForm: SignUpForm): Observable<Account> {
+    return this.httpClient
+      .post<Account>('/accounts/', signUpForm)
+      .pipe(tap((account) => this.store.account$.next(account)));
   }
 
-    return this.httpClient.post('/signin/', signInForm);
   signIn(signInForm: SignInForm): Observable<Account> {
+    return this.httpClient
+      .post<Account>('/signin/', signInForm)
+      .pipe(tap((account) => this.store.account$.next(account)));
+  }
   }
 }
