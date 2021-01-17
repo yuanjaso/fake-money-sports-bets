@@ -11,6 +11,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthCookieInterceptor } from './auth/auth-cookie.interceptor';
 import { AuthModule } from './auth/auth.module';
+import { GamesModule } from './games/games.module';
 import { HomeModule } from './home/home.module';
 
 @NgModule({
@@ -27,6 +28,7 @@ import { HomeModule } from './home/home.module';
     MatListModule,
     AuthModule,
     HomeModule,
+    GamesModule,
   ],
   providers: [
     {
