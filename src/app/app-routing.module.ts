@@ -9,6 +9,11 @@ const routes: Routes = [
       import('./auth/auth.module').then((mod) => mod.AuthModule),
   },
   {
+    path: 'games',
+    loadChildren: () =>
+      import('./games/games.module').then((mod) => mod.GamesModule),
+  },
+  {
     path: '',
     loadChildren: () =>
       import('./home/home.module').then((mod) => mod.HomeModule),
