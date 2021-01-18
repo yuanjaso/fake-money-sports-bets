@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-games-board',
@@ -6,7 +9,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./games-board.component.scss'],
 })
 export class GamesBoardComponent implements OnInit {
-  constructor() {}
+  league$: Observable<string> | undefined;
 
-  ngOnInit(): void {}
+  constructor(private activatedRoute: ActivatedRoute) {}
+
+  ngOnInit(): void {
+    this.league$ = this.activatedRoute.params.pipe(
+      map((params) => params.league)
+    );
+  }
 }

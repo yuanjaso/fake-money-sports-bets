@@ -7,12 +7,7 @@ const routes: Routes = [
   {
     component: GamesComponent,
     path: '',
-    children: [
-      { component: GamesBoardComponent, path: 'nhl' },
-      { component: GamesBoardComponent, path: 'nfl' },
-      { component: GamesBoardComponent, path: 'nba' },
-      { component: GamesBoardComponent, path: 'mlb' },
-    ],
+    children: [{ component: GamesBoardComponent, path: ':league' }],
   },
 ];
 
