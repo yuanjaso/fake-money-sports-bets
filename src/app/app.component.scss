@@ -1,4 +1,8 @@
 mat-toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 999;
+
   > *:not(:first-child) {
     margin-left: 1rem;
   }
