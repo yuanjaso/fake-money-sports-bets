@@ -1,8 +1,13 @@
 <nav mat-tab-nav-bar>
-  <a mat-tab-link routerLink="/games/nfl"> NFL </a>
-  <a mat-tab-link routerLink="/games/nba"> NBA </a>
-  <a mat-tab-link routerLink="/games/mlb"> MLB </a>
-  <a mat-tab-link routerLink="/games/nhl"> NHL </a>
+  <a
+    *ngFor="let league of leagues"
+    (click)="activeRoute = league"
+    mat-tab-link
+    [routerLink]="'/games/' + league"
+    [active]="league === activeRoute"
+  >
+    {{ league | uppercase }}
+  </a>
 </nav>
 
 <router-outlet></router-outlet>
