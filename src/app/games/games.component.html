@@ -3,7 +3,7 @@
     *ngFor="let league of leagues"
     (click)="activeRoute = league"
     mat-tab-link
-    [routerLink]="'/games/' + league"
+    [routerLink]="['/games', league]"
     [active]="league === activeRoute"
   >
     {{ league | uppercase }}
