@@ -1,2 +1,4 @@
-<p>Currently viewing the games board of: {{ league }}</p>
-<div *ngFor="let game of games$ | async">{{ game | json }}</div>
+<div class="game column" *ngFor="let game of games">
+  <span>Home: {{ game.home }}</span>
+  <span>Away: {{ game.away }}</span>
+</div>

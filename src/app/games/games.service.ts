@@ -19,6 +19,39 @@ export class GamesService {
             home: 'Orlando Magic',
             away: 'New York Knicks',
           },
+          {
+            home: 'Cleveland Cavaliers',
+            away: 'Washington Wizards',
+          },
+          {
+            home: 'Minnesota Timberwolves',
+            away: 'Atlanta Hawks',
+          },
+          {
+            home: 'San Antonio Spurs',
+            away: 'Portland Trailblazers',
+          },
+          {
+            home: 'Phoenix Suns',
+            away: 'Memphis Grizzlies',
+          },
+          {
+            home: 'Milwaukee Bucks',
+            away: 'Brooklyn Nets',
+          },
+
+          {
+            home: 'Detroit Pistons',
+            away: 'Miami Heat',
+          },
+          {
+            home: 'Houston Rockets',
+            away: 'Chicago Bulls',
+          },
+          {
+            home: 'Golden State Warriors',
+            away: 'Los Angeles Lakers',
+          },
         ]);
       case 'nfl':
         return of([

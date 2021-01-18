@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Observable, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 import { GamesService } from '../games.service';
 import { Game } from '../games.types';
@@ -12,7 +12,7 @@ import { Game } from '../games.types';
 })
 export class GamesBoardComponent implements OnInit, OnDestroy {
   league: string | undefined;
-  games$: Observable<Game[]> | undefined;
+  games: Game[] = [];
 
   private subscription = new Subscription();
 
@@ -28,7 +28,10 @@ export class GamesBoardComponent implements OnInit, OnDestroy {
         this.league = league;
 
         // ? refactor when ngrx version 11 comes out
-        this.games$ = this.gamesService.getGames(league);
+        this.gamesService
+          .getGames(league)
+          .pipe(tap((games) => (this.games = games)))
+          .subscribe();
       })
     );
     this.subscription.add(leagueChanged$.subscribe());
