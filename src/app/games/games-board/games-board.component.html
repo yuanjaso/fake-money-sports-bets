@@ -1,4 +1,11 @@
-<div class="game column" *ngFor="let game of games">
-  <span>Home: {{ game.home }}</span>
-  <span>Away: {{ game.away }}</span>
+<div class="game row" *ngFor="let game of games">
+  <div class="column label">
+    <div>Home:</div>
+    <div>Away:</div>
+  </div>
+
+  <div class="column">
+    <div>{{ game.home }}</div>
+    <div>{{ game.away }}</div>
+  </div>
 </div>
