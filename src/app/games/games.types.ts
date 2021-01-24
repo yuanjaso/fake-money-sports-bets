@@ -1,4 +1,9 @@
+export type Team = {
+  name: string;
+  moneyLine: number;
+};
+
 export type Game = {
-  home: string;
-  away: string;
+  home: Team;
+  away: Team;
 };

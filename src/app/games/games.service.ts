@@ -12,56 +12,59 @@ export class GamesService {
       case 'nba':
         return of([
           {
-            home: 'Toronto Raptors',
-            away: 'Dallas Mavericks',
+            home: {
+              name: 'Toronto Raptors',
+              moneyLine: 125,
+            },
+            away: { name: 'Dallas Mavericks', moneyLine: -140 },
           },
           {
-            home: 'Orlando Magic',
-            away: 'New York Knicks',
+            home: { name: 'Orlando Magic', moneyLine: 100 },
+            away: { name: 'New York Knicks', moneyLine: -45 },
           },
           {
-            home: 'Cleveland Cavaliers',
-            away: 'Washington Wizards',
+            home: { name: 'Cleveland Cavaliers', moneyLine: -140 },
+            away: { name: 'Washington Wizards', moneyLine: -140 },
           },
           {
-            home: 'Minnesota Timberwolves',
-            away: 'Atlanta Hawks',
+            home: { name: 'Minnesota Timberwolves', moneyLine: -140 },
+            away: { name: 'Atlanta Hawks', moneyLine: -140 },
           },
           {
-            home: 'San Antonio Spurs',
-            away: 'Portland Trailblazers',
+            home: { name: 'San Antonio Spurs', moneyLine: -140 },
+            away: { name: 'Portland Trailblazers', moneyLine: -140 },
           },
           {
-            home: 'Phoenix Suns',
-            away: 'Memphis Grizzlies',
+            home: { name: 'Phoenix Suns', moneyLine: -140 },
+            away: { name: 'Memphis Grizzlies', moneyLine: -140 },
           },
           {
-            home: 'Milwaukee Bucks',
-            away: 'Brooklyn Nets',
+            home: { name: 'Milwaukee Bucks', moneyLine: -140 },
+            away: { name: 'Brooklyn Nets', moneyLine: -140 },
           },
 
           {
-            home: 'Detroit Pistons',
-            away: 'Miami Heat',
+            home: { name: 'Detroit Pistons', moneyLine: -140 },
+            away: { name: 'Miami Heat', moneyLine: -140 },
           },
           {
-            home: 'Houston Rockets',
-            away: 'Chicago Bulls',
+            home: { name: 'Houston Rockets', moneyLine: -140 },
+            away: { name: 'Chicago Bulls', moneyLine: -140 },
           },
           {
-            home: 'Golden State Warriors',
-            away: 'Los Angeles Lakers',
+            home: { name: 'Golden State Warriors', moneyLine: -140 },
+            away: { name: 'Los Angeles Lakers', moneyLine: -140 },
           },
         ]);
       case 'nfl':
         return of([
           {
-            home: 'Buffalo Bills',
-            away: 'Kansas City Chiefs',
+            home: { name: 'Buffalo Bills', moneyLine: -140 },
+            away: { name: 'Kansas City Chiefs', moneyLine: -140 },
           },
           {
-            home: 'Tampa Bay Buccaneers',
-            away: 'Green Bay Packers',
+            home: { name: 'Tampa Bay Buccaneers', moneyLine: -140 },
+            away: { name: 'Green Bay Packers', moneyLine: -140 },
           },
         ]);
       default:
