@@ -40,4 +40,8 @@ export class GamesBoardComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
+
+  selectGame(game: Game): void {
+    this.gamesService.selectedGame$.next(game);
+  }
 }

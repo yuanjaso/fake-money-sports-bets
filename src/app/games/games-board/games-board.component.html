@@ -1,5 +1,5 @@
-<div class="game row" *ngFor="let game of games">
 <div id="games-wrapper">
+<div class="game row" *ngFor="let game of games" (click)="selectGame(game)">
   <div class="column label">
     <div>Home:</div>
     <div>Away:</div>
