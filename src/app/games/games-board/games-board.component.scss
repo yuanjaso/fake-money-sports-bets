@@ -1,11 +1,13 @@
-:host {
+div#games-wrapper {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  justify-content: space-evenly;
   padding: 2.5rem;
 
   div.game {
     cursor: pointer;
+    height: fit-content;
     width: 15rem;
     border: 1px solid black;
     border-radius: 0.5rem;
