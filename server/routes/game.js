@@ -13,41 +13,41 @@ router.get('/games/nba', (req, res, next) => {
       away: { name: 'Dallas Mavericks', moneyLine: -140 },
     },
     {
-      home: { name: 'Orlando Magic', moneyLine: 100 },
-      away: { name: 'New York Knicks', moneyLine: -45 },
+      home: { name: 'Orlando Magic', moneyLine: 300 },
+      away: { name: 'New York Knicks', moneyLine: -450 },
     },
     {
       home: { name: 'Cleveland Cavaliers', moneyLine: -140 },
-      away: { name: 'Washington Wizards', moneyLine: -140 },
+      away: { name: 'Washington Wizards', moneyLine: 150 },
     },
     {
       home: { name: 'Minnesota Timberwolves', moneyLine: -140 },
-      away: { name: 'Atlanta Hawks', moneyLine: -140 },
+      away: { name: 'Atlanta Hawks', moneyLine: 160 },
     },
     {
       home: { name: 'San Antonio Spurs', moneyLine: -140 },
-      away: { name: 'Portland Trailblazers', moneyLine: -140 },
+      away: { name: 'Portland Trailblazers', moneyLine: 160 },
     },
     {
       home: { name: 'Phoenix Suns', moneyLine: -140 },
-      away: { name: 'Memphis Grizzlies', moneyLine: -140 },
+      away: { name: 'Memphis Grizzlies', moneyLine: 170 },
     },
     {
-      home: { name: 'Milwaukee Bucks', moneyLine: -140 },
-      away: { name: 'Brooklyn Nets', moneyLine: -140 },
+      home: { name: 'Milwaukee Bucks', moneyLine: 340 },
+      away: { name: 'Brooklyn Nets', moneyLine: -160 },
     },
 
     {
-      home: { name: 'Detroit Pistons', moneyLine: -140 },
-      away: { name: 'Miami Heat', moneyLine: -140 },
+      home: { name: 'Detroit Pistons', moneyLine: 240 },
+      away: { name: 'Miami Heat', moneyLine: -180 },
     },
     {
-      home: { name: 'Houston Rockets', moneyLine: -140 },
+      home: { name: 'Houston Rockets', moneyLine: 120 },
       away: { name: 'Chicago Bulls', moneyLine: -140 },
     },
     {
       home: { name: 'Golden State Warriors', moneyLine: -140 },
-      away: { name: 'Los Angeles Lakers', moneyLine: -140 },
+      away: { name: 'Los Angeles Lakers', moneyLine: 140 },
     },
   ]);
 });
@@ -79,11 +79,11 @@ router.get('/games/nfl', (req, res, next) => {
   const league = req.params.league;
   res.json([
     {
-      home: { name: 'Buffalo Bills', moneyLine: -140 },
-      away: { name: 'Kansas City Chiefs', moneyLine: -140 },
+      home: { name: 'Buffalo Bills', moneyLine: 270 },
+      away: { name: 'Kansas City Chiefs', moneyLine: -150 },
     },
     {
-      home: { name: 'Tampa Bay Buccaneers', moneyLine: -140 },
+      home: { name: 'Tampa Bay Buccaneers', moneyLine: 190 },
       away: { name: 'Green Bay Packers', moneyLine: -140 },
     },
   ]);
