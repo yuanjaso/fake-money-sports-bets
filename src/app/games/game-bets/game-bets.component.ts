@@ -49,8 +49,8 @@ export class GameBetsComponent implements OnInit {
       .subscribe();
   }
 
-    console.log('form submitted', this.form.value);
   placeMoneylineBet(): void {
+    console.log('form submitted', this.form.value);
   }
 
   private calculatePayout(betAmount: number, odds: number): number {
