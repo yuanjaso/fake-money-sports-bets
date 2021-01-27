@@ -1,21 +1,21 @@
 <div id="games-wrapper">
   <ng-container *ngIf="games !== undefined && games!.length !== 0">
-  <div
-    class="game row"
-    *ngFor="let game of games"
-    (click)="selectGame(game)"
-    [ngClass]="{ 'selected-game': game === selectedGame }"
-  >
-    <div class="column label">
-      <div>Home:</div>
-      <div>Away:</div>
-    </div>
+    <div
+      class="game row"
+      *ngFor="let game of games"
+      (click)="selectGame(game)"
+      [ngClass]="{ 'selected-game': game === selectedGame }"
+    >
+      <div class="column label">
+        <div>Home:</div>
+        <div>Away:</div>
+      </div>
 
-    <div class="column">
-      <div>{{ game.home.name }}</div>
-      <div>{{ game.away.name }}</div>
+      <div class="column">
+        <div>{{ game.home.name }}</div>
+        <div>{{ game.away.name }}</div>
+      </div>
     </div>
-  </div>
   </ng-container>
   <ng-container *ngIf="games !== undefined && games!.length === 0">
     <p>No games for today.</p>
