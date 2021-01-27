@@ -1,4 +1,5 @@
 <div id="games-wrapper">
+  <ng-container *ngIf="games !== undefined && games!.length !== 0">
   <div
     class="game row"
     *ngFor="let game of games"
@@ -15,4 +16,8 @@
       <div>{{ game.away.name }}</div>
     </div>
   </div>
+  </ng-container>
+  <ng-container *ngIf="games !== undefined && games!.length === 0">
+    <p>No games for today.</p>
+  </ng-container>
 </div>

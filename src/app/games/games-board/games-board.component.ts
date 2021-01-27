@@ -12,7 +12,7 @@ import { Game } from '../games.types';
 })
 export class GamesBoardComponent implements OnInit, OnDestroy {
   league: string | undefined;
-  games: Game[] = [];
+  games: Game[] | undefined;
   selectedGame: Game | undefined;
 
   private subscription = new Subscription();
