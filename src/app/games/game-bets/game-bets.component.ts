@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { filter, tap } from 'rxjs/operators';
+import { MockStoreService } from '../../mock-store.service';
+import { Account } from '../../shared/shared.types';
 import { GamesService } from '../games.service';
 import { Game } from '../games.types';
 
@@ -18,9 +20,18 @@ export class GameBetsComponent implements OnInit {
   });
   moneylinePayout = 0;
 
-  constructor(private gamesService: GamesService) {}
+  balance!: number;
+
+  constructor(
+    private gamesService: GamesService,
+    private store: MockStoreService
+  ) {}
 
   ngOnInit(): void {
+    this.store.account$.subscribe(
+      (account) => (this.balance = (account as Account).balance)
+    );
+
     this.gamesService.selectedGame$.subscribe((game) => {
       this.game = game;
       this.moneyline.reset();
