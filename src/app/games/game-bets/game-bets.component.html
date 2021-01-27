@@ -1,0 +1,65 @@
+<form
+  id="game-bets"
+  class="column"
+  *ngIf="game !== undefined; else noGameSelected"
+  [formGroup]="moneyline"
+  (submit)="placeMoneylineBet()"
+>
+  <div id="moneyline" class="column">
+    <h2>Moneyline</h2>
+
+    <mat-button-toggle-group formControlName="team">
+      <mat-button-toggle [value]="game!.away">
+        {{
+          game!.away.name +
+            ': ' +
+            (game!.away.moneyLine > 0 ? '+' : '') +
+            game!.away.moneyLine
+        }}
+      </mat-button-toggle>
+      <mat-button-toggle [value]="game!.home">
+        {{
+          game!.home.name +
+            ': ' +
+            (game!.home.moneyLine > 0 ? '+' : '') +
+            game!.home.moneyLine
+        }}
+      </mat-button-toggle>
+    </mat-button-toggle-group>
+
+    <mat-form-field appearance="standard">
+      <mat-label>Bet Amount</mat-label>
+      <span matPrefix>$&nbsp;</span>
+      <input
+        matInput
+        type="number"
+        formControlName="betAmount"
+        [max]="balance"
+      />
+    </mat-form-field>
+
+    <p>
+      Amount Earned:
+      {{ moneylinePayout | currency: 'CAD':'symbol-narrow':'1.2-2' }}
+    </p>
+  </div>
+
+  <div id="buttons" class="row">
+    <button type="reset" mat-raised-button color="accent">Reset</button>
+
+    <button
+      type="submit"
+      mat-raised-button
+      color="primary"
+      [disabled]="moneyline.value.betAmount > balance"
+    >
+      Submit
+    </button>
+  </div>
+</form>
+
+<!-- <mat-divider></mat-divider> -->
+
+<ng-template #noGameSelected>
+  <p>No Game Selected!</p>
+</ng-template>

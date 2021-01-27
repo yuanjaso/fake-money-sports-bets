@@ -1,0 +1,43 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  padding: 1rem;
+  border-left: 1px solid black;
+
+  > * {
+    align-items: center;
+
+    width: 24.5rem;
+  }
+
+  form {
+    div#buttons {
+      width: 15rem;
+      justify-content: space-evenly;
+    }
+
+    mat-divider {
+      width: 100%;
+      margin: {
+        top: 2rem;
+        bottom: 2rem;
+      }
+    }
+
+    > div {
+      width: inherit;
+
+      align-items: center;
+    }
+
+    > * {
+      width: fit-content;
+    }
+  }
+
+  p {
+    text-align: center;
+  }
+}

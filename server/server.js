@@ -9,6 +9,7 @@ const passportLocal = require('passport-local');
 const expressSession = require('express-session');
 const connectMongo = require('connect-mongo');
 
+const gameRoutes = require('./routes/game');
 const accountRoutes = require('./routes/account');
 const authRoutes = require('./routes/auth');
 const AccountModel = require('./models/account');
@@ -64,6 +65,7 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
+app.use('/api', gameRoutes);
 app.use('/api', accountRoutes);
 app.use('/api', authRoutes);
 

@@ -1,0 +1,17 @@
+<nav mat-tab-nav-bar>
+  <a
+    *ngFor="let league of leagues"
+    (click)="activeRoute = league"
+    mat-tab-link
+    [routerLink]="['/games', league]"
+    [active]="league === activeRoute"
+  >
+    {{ league | uppercase }}
+  </a>
+</nav>
+
+<div id="games-content" class="row">
+  <router-outlet></router-outlet>
+
+  <app-game-bets></app-game-bets>
+</div>
