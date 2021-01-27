@@ -1,18 +1,18 @@
 <div id="games-wrapper">
-<div
-  class="game row"
-  *ngFor="let game of games"
-  (click)="selectGame(game)"
-  [ngClass]="{ 'selected-game': game === selectedGame }"
->
-  <div class="column label">
-    <div>Home:</div>
-    <div>Away:</div>
-  </div>
+  <div
+    class="game row"
+    *ngFor="let game of games"
+    (click)="selectGame(game)"
+    [ngClass]="{ 'selected-game': game === selectedGame }"
+  >
+    <div class="column label">
+      <div>Home:</div>
+      <div>Away:</div>
+    </div>
 
-  <div class="column">
-    <div>{{ game.home.name }}</div>
-    <div>{{ game.away.name }}</div>
+    <div class="column">
+      <div>{{ game.home.name }}</div>
+      <div>{{ game.away.name }}</div>
+    </div>
   </div>
-</div>
 </div>
