@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, of, Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { HttpClientWrapper } from '../shared/http-client-wrapper';
 import { Game } from './games.types';
 

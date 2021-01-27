@@ -12,11 +12,10 @@ import { Game } from '../games.types';
 export class GameBetsComponent implements OnInit {
   game: Game | undefined;
 
-  form = new FormGroup({
-    moneylineTeam: new FormControl(null, [Validators.required]),
-    moneylineGamble: new FormControl(),
+  moneyline = new FormGroup({
+    team: new FormControl(null, [Validators.required]),
+    betAmount: new FormControl(),
   });
-
   moneylinePayout = 0;
 
   constructor(private gamesService: GamesService) {}
@@ -24,24 +23,25 @@ export class GameBetsComponent implements OnInit {
   ngOnInit(): void {
     this.gamesService.selectedGame$.subscribe((game) => {
       this.game = game;
-      this.form.reset();
+      this.moneyline.reset();
       this.moneylinePayout = 0;
     });
 
-    this.form.valueChanges
+    this.moneyline.valueChanges
       .pipe(
-        filter((form) => form.moneylineTeam && form.moneylineGamble),
+        filter((form) => form.team && form.betAmount),
         tap((form) => {
+          const game = this.game as Game;
           // check which team the user selected
-          if (form.moneylineTeam === this.game?.home.name) {
+          if (form.team === game.home) {
             this.moneylinePayout = this.calculatePayout(
-              form.moneylineGamble,
-              (this.game as Game).home.moneyLine
+              form.betAmount,
+              game.home.moneyLine
             );
           } else {
             this.moneylinePayout = this.calculatePayout(
-              form.moneylineGamble,
-              (this.game as Game).away.moneyLine
+              form.betAmount,
+              game.away.moneyLine
             );
           }
         })
@@ -49,8 +49,8 @@ export class GameBetsComponent implements OnInit {
       .subscribe();
   }
 
-  submit(): void {
     console.log('form submitted', this.form.value);
+  placeMoneylineBet(): void {
   }
 
   private calculatePayout(betAmount: number, odds: number): number {
