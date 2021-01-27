@@ -33,9 +33,15 @@
 <mat-sidenav-container>
   <mat-sidenav [opened]="showSidenav" mode="side">
     <mat-nav-list>
-      <a mat-list-item routerLink="/games">Games</a>
-      <a mat-list-item disabled>History</a>
-      <a mat-list-item disabled>Settings</a>
+      <a mat-list-item routerLink="/games">
+        <mat-icon matListIcon>sports</mat-icon> Games
+      </a>
+      <a mat-list-item disabled>
+        <mat-icon matListIcon>history</mat-icon> History
+      </a>
+      <a mat-list-item disabled>
+        <mat-icon matListIcon>settings</mat-icon> Settings
+      </a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
