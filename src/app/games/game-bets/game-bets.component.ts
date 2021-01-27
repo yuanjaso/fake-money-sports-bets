@@ -56,10 +56,10 @@ export class GameBetsComponent implements OnInit {
   private calculatePayout(betAmount: number, odds: number): number {
     if (odds < 0) {
       // favourite
-      return betAmount * (-odds / 100);
+      return (100 / -odds) * betAmount;
     } else if (odds > 0) {
       // underdog
-      return betAmount / (odds / 100);
+      return (odds / 100) * betAmount;
     } else {
       // zero case not sure what to do
       return betAmount;
