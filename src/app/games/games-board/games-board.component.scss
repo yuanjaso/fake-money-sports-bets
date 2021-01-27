@@ -20,5 +20,9 @@ div#games-wrapper {
     div.label {
       margin-right: 0.5rem;
     }
+
+    &.selected-game {
+      background-color: darkseagreen;
+    }
   }
 }

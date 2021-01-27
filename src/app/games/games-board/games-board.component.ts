@@ -13,6 +13,7 @@ import { Game } from '../games.types';
 export class GamesBoardComponent implements OnInit, OnDestroy {
   league: string | undefined;
   games: Game[] = [];
+  selectedGame: Game | undefined;
 
   private subscription = new Subscription();
 
@@ -42,6 +43,7 @@ export class GamesBoardComponent implements OnInit, OnDestroy {
   }
 
   selectGame(game: Game): void {
+    this.selectedGame = game;
     this.gamesService.selectedGame$.next(game);
   }
 }
