@@ -60,6 +60,72 @@
 
 <mat-divider></mat-divider>
 
+<form
+  id="spread"
+  class="column"
+  *ngIf="game !== undefined; else noGameSelected"
+  [formGroup]="spread"
+  (submit)="placeSpreadBet()"
+>
+  <div id="spread-content" class="column">
+    <h2>Spread</h2>
+
+    <mat-button-toggle-group formControlName="team" [vertical]="true">
+      <mat-button-toggle [value]="game!.away">
+        {{
+          game!.away.name +
+            ': ' +
+            (game!.away.spread > 0 ? '+' : '') +
+            game!.away.spread +
+            ' (' +
+            game!.away.spreadOdds +
+            ')'
+        }}
+      </mat-button-toggle>
+      <mat-button-toggle [value]="game!.home">
+        {{
+          game!.home.name +
+            ': ' +
+            (game!.home.spread > 0 ? '+' : '') +
+            game!.home.spread +
+            ' (' +
+            game!.home.spreadOdds +
+            ')'
+        }}
+      </mat-button-toggle>
+    </mat-button-toggle-group>
+
+    <mat-form-field appearance="standard">
+      <mat-label>Bet Amount</mat-label>
+      <span matPrefix>$&nbsp;</span>
+      <input
+        matInput
+        type="number"
+        formControlName="betAmount"
+        [max]="balance"
+      />
+    </mat-form-field>
+
+    <p>
+      Amount Earned:
+      {{ spreadPayout | currency: 'CAD':'symbol-narrow':'1.2-2' }}
+    </p>
+  </div>
+
+  <div class="buttons row">
+    <button type="reset" mat-raised-button color="accent">Reset</button>
+
+    <button
+      type="submit"
+      mat-raised-button
+      color="primary"
+      [disabled]="spread.value.betAmount > balance"
+    >
+      Submit
+    </button>
+  </div>
+</form>
+
 <ng-template #noGameSelected>
   <p>No Game Selected!</p>
 </ng-template>

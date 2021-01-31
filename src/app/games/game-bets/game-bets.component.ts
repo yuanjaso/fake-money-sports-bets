@@ -20,6 +20,12 @@ export class GameBetsComponent implements OnInit {
   });
   moneylinePayout = 0;
 
+  spread = new FormGroup({
+    team: new FormControl(null, [Validators.required]),
+    betAmount: new FormControl(),
+  });
+  spreadPayout = 0;
+
   balance!: number;
 
   constructor(
@@ -58,10 +64,35 @@ export class GameBetsComponent implements OnInit {
         })
       )
       .subscribe();
+
+    this.spread.valueChanges
+      .pipe(
+        filter((form) => form.team && form.betAmount),
+        tap((form) => {
+          const game = this.game as Game;
+          // check which team the user selected
+          if (form.team === game.home) {
+            this.spreadPayout = this.calculatePayout(
+              form.betAmount,
+              game.home.spreadOdds
+            );
+          } else {
+            this.spreadPayout = this.calculatePayout(
+              form.betAmount,
+              game.away.spreadOdds
+            );
+          }
+        })
+      )
+      .subscribe();
   }
 
   placeMoneylineBet(): void {
     console.log('form submitted', this.moneyline.value);
+  }
+
+  placeSpreadBet(): void {
+    console.log('spread form submitted', this.spread.value);
   }
 
   private calculatePayout(betAmount: number, odds: number): number {
