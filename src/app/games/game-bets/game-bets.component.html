@@ -1,14 +1,14 @@
 <form
-  id="game-bets"
+  id="moneyline"
   class="column"
   *ngIf="game !== undefined; else noGameSelected"
   [formGroup]="moneyline"
   (submit)="placeMoneylineBet()"
 >
-  <div id="moneyline" class="column">
+  <div id="moneyline-content" class="column">
     <h2>Moneyline</h2>
 
-    <mat-button-toggle-group formControlName="team">
+    <mat-button-toggle-group formControlName="team" [vertical]="true">
       <mat-button-toggle [value]="game!.away">
         {{
           game!.away.name +
@@ -44,7 +44,7 @@
     </p>
   </div>
 
-  <div id="buttons" class="row">
+  <div class="buttons row">
     <button type="reset" mat-raised-button color="accent">Reset</button>
 
     <button
@@ -58,7 +58,7 @@
   </div>
 </form>
 
-<!-- <mat-divider></mat-divider> -->
+<mat-divider></mat-divider>
 
 <ng-template #noGameSelected>
   <p>No Game Selected!</p>
