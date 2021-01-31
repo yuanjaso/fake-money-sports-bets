@@ -9,21 +9,13 @@
   > * {
     align-items: center;
 
-    width: 24.5rem;
+    width: 20rem;
   }
 
   form {
-    div#buttons {
+    div.buttons {
       width: 15rem;
       justify-content: space-evenly;
-    }
-
-    mat-divider {
-      width: 100%;
-      margin: {
-        top: 2rem;
-        bottom: 2rem;
-      }
     }
 
     > div {
@@ -39,5 +31,13 @@
 
   p {
     text-align: center;
+  }
+
+  mat-divider {
+    width: 100%;
+    margin: {
+      top: 2rem;
+      bottom: 2rem;
+    }
   }
 }
