@@ -15,6 +15,12 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
+    path: 'history',
+    loadChildren: () =>
+      import('./history/history.module').then((mod) => mod.HistoryModule),
+    canActivate: [AuthGuard],
+  },
+  {
     path: '',
     loadChildren: () =>
       import('./home/home.module').then((mod) => mod.HomeModule),
