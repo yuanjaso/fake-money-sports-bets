@@ -3,7 +3,6 @@ const express = require('express');
 const router = express.Router();
 
 router.get('/games/nba', (req, res, next) => {
-  const league = req.params.league;
   res.json([
     {
       home: {
@@ -53,12 +52,10 @@ router.get('/games/nba', (req, res, next) => {
 });
 
 router.get('/games/mlb', (req, res, next) => {
-  const league = req.params.league;
   res.json([]);
 });
 
 router.get('/games/nhl', (req, res, next) => {
-  const league = req.params.league;
   res.json([
     {
       home: { name: 'Pittsburgh Penguins', moneyLine: -100 },
@@ -76,7 +73,6 @@ router.get('/games/nhl', (req, res, next) => {
 });
 
 router.get('/games/nfl', (req, res, next) => {
-  const league = req.params.league;
   res.json([
     {
       home: { name: 'Buffalo Bills', moneyLine: 270 },
