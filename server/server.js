@@ -1,4 +1,6 @@
+const http = require('http');
 const express = require('express');
+const socketio = require('socket.io');
 const cors = require('cors');
 const morgan = require('morgan');
 const helmet = require('helmet');
@@ -79,6 +81,16 @@ passport.use(new passportLocal.Strategy(AccountModel.authenticate()));
 passport.serializeUser(AccountModel.serializeUser());
 passport.deserializeUser(AccountModel.deserializeUser());
 
-app.listen(PORT, () => {
+const server = http.createServer(app);
+
+const io = socketio(server, {
+  cors: { origin },
+});
+io.on('connect', (socket) => {
+  console.log('connection established', socket.id);
+  io.emit('nba-data', [{ team: 1, score: 4 }]);
+});
+
+server.listen(PORT, () => {
   console.log(`Server started on port ${PORT}.`);
 });

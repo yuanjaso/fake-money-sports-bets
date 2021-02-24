@@ -14,22 +14,34 @@ export class HttpClientWrapper {
   constructor(private httpClient: HttpClient) {}
 
   get<T>(url: string, params?: QueryParams): Observable<T> {
-    return this.httpClient.get<T>(`${environment.apiURL}${url}`, { params });
+    return this.httpClient.get<T>(`${environment.serverDomain}/api${url}`, {
+      params,
+    });
   }
 
   post<T>(url: string, body: any | null, params?: QueryParams): Observable<T> {
-    return this.httpClient.post<T>(`${environment.apiURL}${url}`, body, {
-      params,
-    });
+    return this.httpClient.post<T>(
+      `${environment.serverDomain}/api${url}`,
+      body,
+      {
+        params,
+      }
+    );
   }
 
   patch<T>(url: string, body: any | null, params?: QueryParams): Observable<T> {
-    return this.httpClient.patch<T>(`${environment.apiURL}${url}`, body, {
-      params,
-    });
+    return this.httpClient.patch<T>(
+      `${environment.serverDomain}/api${url}`,
+      body,
+      {
+        params,
+      }
+    );
   }
 
   delete<T>(url: string, params?: QueryParams): Observable<T> {
-    return this.httpClient.delete<T>(`${environment.apiURL}${url}`, { params });
+    return this.httpClient.delete<T>(`${environment.serverDomain}/api${url}`, {
+      params,
+    });
   }
 }
