@@ -94,3 +94,11 @@ io.on('connect', (socket) => {
 server.listen(PORT, () => {
   console.log(`Server started on port ${PORT}.`);
 });
+
+// ! this is only here as a POC that the clock process can make a request with the scraped data
+// ! remove later
+app.post('/api/games/nba', (req, res, next) => {
+  console.log(req.body);
+  io.emit('nba-data', req.body);
+  res.json(req.body);
+});
