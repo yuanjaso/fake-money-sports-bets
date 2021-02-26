@@ -11,7 +11,7 @@ const rule = new schedule.RecurrenceRule();
 
 if (debug) {
   // rule.second = new schedule.Range(0, 59, 15);
-  rule.minute = new schedule.Range(0, 59, 1);
+  rule.minute = new schedule.Range(0, 59, 5);
 } else {
   // 12PM to 2AM
   rule.hour = [new schedule.Range(0, 2), new schedule.Range(12, 23)];
