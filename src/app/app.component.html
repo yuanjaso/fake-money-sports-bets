@@ -47,9 +47,9 @@
   <mat-sidenav-content>
     <!-- ! remove after real socket data is implemented -->
     <div id="temporary-scoreboard">
-      Scoreboard for {{ POC_SOCKET_DATA.date }} (temporary content)
+      Scoreboard for {{ POC_SOCKET_DATA?.date }} (temporary content)
       <div
-        *ngFor="let game of POC_SOCKET_DATA.scoreboard"
+        *ngFor="let game of POC_SOCKET_DATA?.scoreboard"
         style="margin-bottom: 1rem"
       >
         <div class="team">
