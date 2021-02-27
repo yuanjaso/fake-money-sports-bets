@@ -41,11 +41,10 @@ export class AppComponent implements OnInit, OnDestroy {
     });
 
     // ! remove after real socket data is implemented
-    socket.on('nba-data', (data: any[]) => {
+    socket.on('real-time-score-updates', (data: any) => {
       this.POC_SOCKET_DATA = data;
-      console.log('data from nba-data event', data);
+      console.log('real-time-score-updates:', data);
     });
-
     // END SOCKET IO
 
     const isAuthenticated$ = this.store.account$.pipe(

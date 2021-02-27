@@ -10,6 +10,7 @@ const passport = require('passport');
 const passportLocal = require('passport-local');
 const expressSession = require('express-session');
 const connectMongo = require('connect-mongo');
+const redisAdapter = require('socket.io-redis');
 
 const gameRoutes = require('./routes/game');
 const accountRoutes = require('./routes/account');
@@ -39,14 +40,17 @@ app.use(helmet());
 
 let secureCookie;
 let origin;
+let REDIS_URL;
 if (NODE_ENV === 'production') {
   secureCookie = true;
   // this is needed when deploying on heroku with the secure flag on
   // otherwise cookie isn't sent to client
   app.set('trust proxy', 1);
+  REDIS_URL = process.env.REDIS_TLS_URL;
 } else {
   secureCookie = false;
   origin = 'http://localhost:4200';
+  REDIS_URL = process.env.REDIS_URL;
 }
 app.use(cors({ credentials: true, origin }));
 app.use(
@@ -91,14 +95,8 @@ io.on('connect', (socket) => {
   io.emit('nba-data', [{ team: 1, score: 4 }]);
 });
 
+io.adapter(redisAdapter(REDIS_URL));
+
 server.listen(PORT, () => {
   console.log(`Server started on port ${PORT}.`);
-});
-
-// ! this is only here as a POC that the clock process can make a request with the scraped data
-// ! remove later
-app.post('/api/games/nba', (req, res, next) => {
-  console.log(req.body);
-  io.emit('nba-data', req.body);
-  res.json(req.body);
 });

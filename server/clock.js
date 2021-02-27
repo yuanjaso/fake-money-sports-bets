@@ -1,8 +1,21 @@
-const axios = require('axios');
 const schedule = require('node-schedule');
+const random = require('lodash/random');
 const puppeteer = require('puppeteer');
+const socketioEmitter = require('socket.io-emitter');
+
+// ! this process will do the work of a clock/worker processes as a way to save cost on running another worker process
+// ! in the future, the work will be separated
 
 const debug = true;
+
+const NODE_ENV = process.env.NODE_ENV;
+
+let REDIS_URL;
+if (NODE_ENV === 'production') {
+  REDIS_URL = process.env.REDIS_TLS_URL;
+} else {
+  REDIS_URL = process.env.REDIS_URL;
+}
 
 // ? can multiple jobs be scheduled?
 // example: one rule for every monday and all fridays at 1pm as two separate rules
@@ -20,16 +33,30 @@ if (debug) {
   rule.tz = 'America/Toronto';
 }
 
+const emitter = socketioEmitter(REDIS_URL);
+
+emitter.redis.on('error', (err) => {
+  console.log(err);
+});
+
 // scrap espn for nba score data
 schedule.scheduleJob(rule, async (date) => {
-  console.log('running job', date);
-  const url = 'https://www.espn.com/nba/scoreboard/_/date/20210221';
+  console.log('running job:', date);
+  const year = new Date().getFullYear();
+  const month = '02';
+  // random scoreboard from feb 10th - 26th
+  const day = random(10, 26);
+  const league = 'nba';
+  const scoreBoardDate = `${year}${month}${day}`;
+  const url = `https://www.espn.com/${league}/scoreboard/_/date/${scoreBoardDate}`;
+
+  console.log('getting data from', url);
 
   // --no-sandbox option is for running Puppeteer on Heroku
   const browser = await puppeteer.launch({ args: ['--no-sandbox'] });
   const page = await browser.newPage();
   await page.goto(url);
-  const data = await page.evaluate(() => {
+  const scoreboard = await page.evaluate(() => {
     const data = [];
     document.documentElement
       .querySelectorAll('article.basketball')
@@ -52,13 +79,7 @@ schedule.scheduleJob(rule, async (date) => {
 
   await browser.close();
 
-  const serverDomain =
-    process.env.NODE_ENV === 'production'
-      ? 'https://fakemoneysportsbets.com'
-      : 'http://localhost:5000';
-
-  axios
-    .post(`${serverDomain}/api/games/nba`, { nba: data })
-    .then(() => {})
-    .catch(console.error);
+  // this will go to redis which will get picked up by the socket io redis adapter which will forward
+  // the data over to the client
+  emitter.emit('real-time-score-updates', { date: scoreBoardDate, scoreboard });
 });
