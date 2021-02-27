@@ -40,17 +40,21 @@ app.use(helmet());
 
 let secureCookie;
 let origin;
-let REDIS_URL;
+
+// let REDIS_URL;
+// ? temporarily using redis protocol instead of rediss 
+const REDIS_URL = process.env.REDIS_URL;
+
 if (NODE_ENV === 'production') {
   secureCookie = true;
   // this is needed when deploying on heroku with the secure flag on
   // otherwise cookie isn't sent to client
   app.set('trust proxy', 1);
-  REDIS_URL = process.env.REDIS_TLS_URL;
+  // REDIS_URL = process.env.REDIS_TLS_URL;
 } else {
   secureCookie = false;
   origin = 'http://localhost:4200';
-  REDIS_URL = process.env.REDIS_URL;
+  // REDIS_URL = process.env.REDIS_URL;
 }
 app.use(cors({ credentials: true, origin }));
 app.use(

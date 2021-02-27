@@ -10,12 +10,15 @@ const debug = true;
 
 const NODE_ENV = process.env.NODE_ENV;
 
-let REDIS_URL;
-if (NODE_ENV === 'production') {
-  REDIS_URL = process.env.REDIS_TLS_URL;
-} else {
-  REDIS_URL = process.env.REDIS_URL;
-}
+// let REDIS_URL;
+// if (NODE_ENV === 'production') {
+//   REDIS_URL = process.env.REDIS_TLS_URL;
+// } else {
+//   REDIS_URL = process.env.REDIS_URL;
+// }
+
+// ? temporarily using redis protocol instead of rediss 
+const REDIS_URL = process.env.REDIS_URL;
 
 // ? can multiple jobs be scheduled?
 // example: one rule for every monday and all fridays at 1pm as two separate rules
