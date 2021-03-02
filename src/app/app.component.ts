@@ -18,6 +18,9 @@ export class AppComponent implements OnInit, OnDestroy {
   username: string | undefined;
   balance: number | undefined;
 
+  // ! remove after real socket data is implemented
+  POC_SOCKET_DATA: any | undefined;
+
   private subscription = new Subscription();
 
   constructor(
@@ -37,10 +40,11 @@ export class AppComponent implements OnInit, OnDestroy {
       console.log('disconnected to server socket io', socket.id);
     });
 
-    socket.on('nba-data', (data: any[]) => {
-      console.log('data from nba-data event', data);
+    // ! remove after real socket data is implemented
+    socket.on('real-time-score-updates', (data: any) => {
+      this.POC_SOCKET_DATA = data;
+      console.log('real-time-score-updates:', data);
     });
-
     // END SOCKET IO
 
     const isAuthenticated$ = this.store.account$.pipe(
