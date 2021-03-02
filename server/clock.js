@@ -78,9 +78,12 @@ schedule.scheduleJob(rule, async (date) => {
         });
       });
     return data;
+  }).catch((err) => {
+    console.log('there was an error', err);
+  }).finally(() => {
+    console.log('closing chromium');
+    browser.close();
   });
-
-  await browser.close();
 
   // this will go to redis which will get picked up by the socket io redis adapter which will forward
   // the data over to the client
