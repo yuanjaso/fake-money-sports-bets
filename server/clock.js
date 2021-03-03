@@ -82,7 +82,7 @@ schedule.scheduleJob(rule, async (date) => {
   // --no-sandbox option is for running Puppeteer on Heroku
   const browser = await puppeteer.launch({ args: ['--no-sandbox'] });
   const page = await browser.newPage();
-  await page.goto(url);
+  await page.goto(url).catch((err) => console.log(err));
   const scoreboard = await page.evaluate(() => {
     const data = [];
     document.documentElement
