@@ -1,3 +1,4 @@
+const amqp = require('amqplib/callback_api');
 const schedule = require('node-schedule');
 const random = require('lodash/random');
 const puppeteer = require('puppeteer');
@@ -45,6 +46,29 @@ emitter.redis.on('error', (err) => {
 // scrap espn for nba score data
 schedule.scheduleJob(rule, async (date) => {
   console.log('running job:', date);
+
+  amqp.connect(process.env.CLOUDAMQP_URL, (error0, connection) => {
+    if (error0) {
+      throw error0;
+    }
+    connection.createChannel((error1, channel) => {
+      if (error1) {
+        throw error1;
+      }
+
+      const queue = 'web-scrap';
+      const msg = 'nba';
+
+      channel.assertQueue(queue, { durable: false });
+      channel.sendToQueue(queue, Buffer.from(msg));
+      console.log(' [x] Sent %s', msg);
+
+    });
+    setTimeout(() => {
+      connection.close();
+    }, 500);
+  });
+
   const year = new Date().getFullYear();
   const month = '02';
   // random scoreboard from feb 10th - 26th
