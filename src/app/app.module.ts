@@ -13,6 +13,7 @@ import { AuthCookieInterceptor } from './auth/auth-cookie.interceptor';
 import { AuthModule } from './auth/auth.module';
 import { GamesModule } from './games/games.module';
 import { HomeModule } from './home/home.module';
+import { StoreModule } from '@ngrx/store';
 
 @NgModule({
   declarations: [AppComponent],
@@ -29,6 +30,7 @@ import { HomeModule } from './home/home.module';
     AuthModule,
     HomeModule,
     GamesModule,
+    StoreModule.forRoot({}, {}),
   ],
   providers: [
     {
