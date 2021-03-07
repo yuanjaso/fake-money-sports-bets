@@ -14,6 +14,8 @@ import { AuthModule } from './auth/auth.module';
 import { GamesModule } from './games/games.module';
 import { HomeModule } from './home/home.module';
 import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [AppComponent],
@@ -31,6 +33,7 @@ import { StoreModule } from '@ngrx/store';
     HomeModule,
     GamesModule,
     StoreModule.forRoot({}, {}),
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
   ],
   providers: [
     {
