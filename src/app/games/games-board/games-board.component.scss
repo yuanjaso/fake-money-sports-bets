@@ -24,5 +24,13 @@ div#games-wrapper {
     &.selected-game {
       background-color: darkseagreen;
     }
+
+    .winner {
+      color: green;
+    }
+
+    .loser {
+      color: red;
+    }
   }
 }

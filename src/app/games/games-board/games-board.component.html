@@ -15,6 +15,15 @@
         <div>{{ game.home.name }}</div>
         <div>{{ game.away.name }}</div>
       </div>
+
+      <div class="column" style="margin-left: 1rem">
+        <div [ngClass]="game.home.score > game.away.score ? 'winner' : 'loser'">
+          {{ game.home.score }}
+        </div>
+        <div [ngClass]="game.away.score > game.home.score ? 'winner' : 'loser'">
+          {{ game.away.score }}
+        </div>
+      </div>
     </div>
   </ng-container>
   <ng-container *ngIf="games !== undefined && games!.length === 0">
