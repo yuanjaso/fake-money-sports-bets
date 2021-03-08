@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Chart } from 'chart.js';
-import { setData } from './store/history.actions';
+import { getData } from './store/history.actions';
 
 @Component({
   selector: 'app-history',
@@ -22,17 +22,7 @@ export class HistoryComponent implements OnInit, OnDestroy {
   constructor(private store: Store) {}
 
   ngOnInit(): void {
-    this.store.dispatch(
-      setData({
-        data: {
-          league: 'nba',
-          data: [
-            { date: '2021-03-01', value: 300 },
-            { date: '2021-03-04', value: 544 },
-          ],
-        },
-      })
-    );
+    this.store.dispatch(getData({ league: 'nba' }));
 
     Chart.pluginService.register({
       beforeDraw: (chart) => {
