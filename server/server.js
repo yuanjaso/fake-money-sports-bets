@@ -96,7 +96,6 @@ const io = socketio(server, {
 });
 io.on('connect', (socket) => {
   console.log('connection established', socket.id);
-  io.emit('nba-data', [{ team: 1, score: 4 }]);
 });
 
 io.adapter(redisAdapter(REDIS_URL));

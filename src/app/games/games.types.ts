@@ -3,6 +3,8 @@ export type Team = {
   moneyLine: number;
   spread: number;
   spreadOdds: number;
+  // ! here for a POC but could remove later
+  score: number;
 };
 
 export type Game = {

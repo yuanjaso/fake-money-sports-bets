@@ -1,152 +1,9 @@
 const express = require('express');
+const random = require('lodash/random');
+
+const GameModel = require('../models/game');
 
 const router = express.Router();
-
-router.get('/games/nba', (req, res, next) => {
-  res.json([
-    {
-      home: {
-        name: 'Toronto Raptors',
-        moneyLine: 125,
-        spreadOdds: -110,
-        spread: 1.5,
-      },
-      away: {
-        name: 'Dallas Mavericks',
-        moneyLine: -140,
-        spreadOdds: -110,
-        spread: -1.5,
-      },
-    },
-    {
-      home: {
-        name: 'Orlando Magic',
-        moneyLine: 300,
-        spreadOdds: -110,
-        spread: 1.5,
-      },
-      away: {
-        name: 'New York Knicks',
-        moneyLine: -450,
-        spreadOdds: -110,
-        spread: -1.5,
-      },
-    },
-    {
-      home: {
-        name: 'Cleveland Cavaliers',
-        moneyLine: -140,
-        spreadOdds: -110,
-        spread: 1.5,
-      },
-      away: {
-        name: 'Washington Wizards',
-        moneyLine: 150,
-        spreadOdds: -110,
-        spread: -1.5,
-      },
-    },
-    {
-      home: {
-        name: 'Minnesota Timberwolves',
-        moneyLine: -140,
-        spreadOdds: -110,
-        spread: 1.5,
-      },
-      away: {
-        name: 'Atlanta Hawks',
-        moneyLine: 160,
-        spreadOdds: -110,
-        spread: -1.5,
-      },
-    },
-    {
-      home: {
-        name: 'San Antonio Spurs',
-        moneyLine: -140,
-        spreadOdds: -110,
-        spread: 1.5,
-      },
-      away: {
-        name: 'Portland Trailblazers',
-        moneyLine: 160,
-        spreadOdds: -110,
-        spread: -1.5,
-      },
-    },
-    {
-      home: {
-        name: 'Phoenix Suns',
-        moneyLine: -140,
-        spreadOdds: -110,
-        spread: 1.5,
-      },
-      away: {
-        name: 'Memphis Grizzlies',
-        moneyLine: 170,
-        spreadOdds: -110,
-        spread: -1.5,
-      },
-    },
-    {
-      home: {
-        name: 'Milwaukee Bucks',
-        moneyLine: 340,
-        spreadOdds: -110,
-        spread: 1.5,
-      },
-      away: {
-        name: 'Brooklyn Nets',
-        moneyLine: -160,
-        spreadOdds: -110,
-        spread: -1.5,
-      },
-    },
-
-    {
-      home: {
-        name: 'Detroit Pistons',
-        moneyLine: 240,
-        spreadOdds: -110,
-        spread: 1.5,
-      },
-      away: {
-        name: 'Miami Heat',
-        moneyLine: -180,
-        spreadOdds: -110,
-        spread: -1.5,
-      },
-    },
-    {
-      home: {
-        name: 'Houston Rockets',
-        moneyLine: 120,
-        spreadOdds: -110,
-        spread: 1.5,
-      },
-      away: {
-        name: 'Chicago Bulls',
-        moneyLine: -140,
-        spreadOdds: -110,
-        spread: -1.5,
-      },
-    },
-    {
-      home: {
-        name: 'Golden State Warriors',
-        moneyLine: -140,
-        spreadOdds: -110,
-        spread: 1.5,
-      },
-      away: {
-        name: 'Los Angeles Lakers',
-        moneyLine: 140,
-        spreadOdds: -110,
-        spread: -1.5,
-      },
-    },
-  ]);
-});
 
 router.get('/games/mlb', (req, res, next) => {
   res.json([]);
@@ -216,6 +73,34 @@ router.get('/games/nfl', (req, res, next) => {
       },
     },
   ]);
+});
+
+router.get('/games/nba', async (req, res, next) => {
+  const date = req.query.date;
+  try {
+    const scoreboard = await GameModel.findOne({ date });
+    const games = scoreboard.games.map((el) => ({
+      // don't have gambling odds yet so randomize for POC
+      home: {
+        name: el.home.name,
+        score: el.home.score,
+        moneyLine: random(120, 150),
+        spreadOdds: random(-100, -50),
+        spread: random(1, 3),
+      },
+      away: {
+        name: el.away.name,
+        score: el.away.score,
+        moneyLine: random(120, 150),
+        spreadOdds: random(-100, -50),
+        spread: random(1, 3),
+      },
+    }));
+    res.json(games);
+  } catch (err) {
+    // not ideal but temporary
+    res.json([]);
+  }
 });
 
 module.exports = router;

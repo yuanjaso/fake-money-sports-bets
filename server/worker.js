@@ -105,9 +105,7 @@ async function scrap(league) {
 
   if (games === undefined) return;
 
-  const date = new Date();
-  date.setFullYear(year, Number(month) - 1, day);
-  date.setHours(0, 0, 0, 0);
+  const date = `${year}-${month}-${day}`;
 
   // this will go to redis which will get picked up by the socket io redis adapter which will forward
   // the data over to the client
