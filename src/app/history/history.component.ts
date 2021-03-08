@@ -5,7 +5,12 @@ import {
   OnInit,
   ViewChild,
 } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { Chart } from 'chart.js';
+import { Subscription } from 'rxjs';
+import { AppState } from '..';
+import { getData } from './store/history.actions';
+import { selectHistoryData } from './store/history.selectors';
 
 @Component({
   selector: 'app-history',
@@ -17,9 +22,18 @@ export class HistoryComponent implements OnInit, OnDestroy {
   private demoChart!: ElementRef<HTMLCanvasElement>;
   private demoChartRef!: Chart;
 
-  constructor() {}
+  private subscription = new Subscription();
+
+  constructor(private store: Store<AppState>) {}
 
   ngOnInit(): void {
+    // ! BEGIN POC code
+    this.subscription.add(
+      this.store.select(selectHistoryData).subscribe(console.log)
+    );
+    this.store.dispatch(getData({ league: 'nba' }));
+    // ! END POC code
+
     Chart.pluginService.register({
       beforeDraw: (chart) => {
         // empty for now but could be useful later
@@ -62,5 +76,6 @@ export class HistoryComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.demoChartRef.destroy();
+    this.subscription.unsubscribe();
   }
 }

@@ -13,6 +13,10 @@ import { AuthCookieInterceptor } from './auth/auth-cookie.interceptor';
 import { AuthModule } from './auth/auth.module';
 import { GamesModule } from './games/games.module';
 import { HomeModule } from './home/home.module';
+import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from '../environments/environment';
+import { EffectsModule } from '@ngrx/effects';
 
 @NgModule({
   declarations: [AppComponent],
@@ -29,6 +33,9 @@ import { HomeModule } from './home/home.module';
     AuthModule,
     HomeModule,
     GamesModule,
+    StoreModule.forRoot({}, {}),
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
+    EffectsModule.forRoot([]),
   ],
   providers: [
     {
