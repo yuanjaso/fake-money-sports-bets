@@ -9,7 +9,9 @@ export class GamesService {
 
   constructor(private httpClient: HttpClientWrapper) {}
 
-  getGames(league: string): Observable<Game[]> {
-    return this.httpClient.get(`/games/${league}/`);
+  getScoreboard(league: string, date: Date): Observable<Game[]> {
+    return this.httpClient.get<Game[]>(`/games/${league}/`, {
+      date: date.toISOString().slice(0, 10),
+    });
   }
 }

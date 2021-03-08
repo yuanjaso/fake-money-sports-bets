@@ -7,11 +7,15 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatTabsModule } from '@angular/material/tabs';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreModule } from '@ngrx/store';
 import { GameBetsComponent } from './game-bets/game-bets.component';
 import { GamesBoardComponent } from './games-board/games-board.component';
 import { GamesRoutingModule } from './games-routing.module';
 import { GamesComponent } from './games.component';
 import { GamesService } from './games.service';
+import { GamesEffects } from './store/games.effects';
+import { gamesFeatureKey, gamesReducer } from './store/games.reducer';
 
 @NgModule({
   declarations: [GamesComponent, GamesBoardComponent, GameBetsComponent],
@@ -19,6 +23,8 @@ import { GamesService } from './games.service';
     CommonModule,
     ReactiveFormsModule,
     GamesRoutingModule,
+    StoreModule.forFeature(gamesFeatureKey, gamesReducer),
+    EffectsModule.forFeature([GamesEffects]),
     MatTabsModule,
     MatFormFieldModule,
     MatInputModule,
