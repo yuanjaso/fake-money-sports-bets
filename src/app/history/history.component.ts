@@ -5,7 +5,9 @@ import {
   OnInit,
   ViewChild,
 } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { Chart } from 'chart.js';
+import { setData } from './store/history.actions';
 
 @Component({
   selector: 'app-history',
@@ -17,9 +19,21 @@ export class HistoryComponent implements OnInit, OnDestroy {
   private demoChart!: ElementRef<HTMLCanvasElement>;
   private demoChartRef!: Chart;
 
-  constructor() {}
+  constructor(private store: Store) {}
 
   ngOnInit(): void {
+    this.store.dispatch(
+      setData({
+        data: {
+          league: 'nba',
+          data: [
+            { date: '2021-03-01', value: 300 },
+            { date: '2021-03-04', value: 544 },
+          ],
+        },
+      })
+    );
+
     Chart.pluginService.register({
       beforeDraw: (chart) => {
         // empty for now but could be useful later
