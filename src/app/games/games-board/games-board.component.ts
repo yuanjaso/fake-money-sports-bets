@@ -7,6 +7,7 @@ import { AppState } from '../..';
 import { GamesService } from '../games.service';
 import { Game } from '../games.types';
 import { setLeague } from '../store/games.actions';
+import { selectGamesScoreboard } from '../store/games.selectors';
 
 @Component({
   selector: 'app-games-board',
@@ -26,6 +27,12 @@ export class GamesBoardComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
+    this.subscription.add(
+      this.store
+        .select(selectGamesScoreboard)
+        .subscribe((games) => (this.games = games))
+    );
+
     const leagueChanged$ = this.activatedRoute.params.pipe(
       map((params) => params.league),
       tap((league) => {
