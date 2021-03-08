@@ -1,8 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -21,6 +23,7 @@ import { gamesFeatureKey, gamesReducer } from './store/games.reducer';
   declarations: [GamesComponent, GamesBoardComponent, GameBetsComponent],
   imports: [
     CommonModule,
+    FormsModule,
     ReactiveFormsModule,
     GamesRoutingModule,
     StoreModule.forFeature(gamesFeatureKey, gamesReducer),
@@ -31,6 +34,8 @@ import { gamesFeatureKey, gamesReducer } from './store/games.reducer';
     MatButtonModule,
     MatButtonToggleModule,
     MatDividerModule,
+    MatNativeDateModule,
+    MatDatepickerModule,
   ],
   providers: [GamesService],
 })
