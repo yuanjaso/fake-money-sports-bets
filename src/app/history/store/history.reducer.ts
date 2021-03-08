@@ -1,5 +1,4 @@
-import { Action, createReducer, on, State } from '@ngrx/store';
-
+import { Action, createReducer, on } from '@ngrx/store';
 import { setData } from './history.actions';
 
 export interface HistoryState {
@@ -18,7 +17,7 @@ const reducer = createReducer(
 export function historyReducer(
   state: HistoryState | undefined,
   action: Action
-) {
+): HistoryState {
   return reducer(state, action);
 }
 
